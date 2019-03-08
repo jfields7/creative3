@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <title>Cannon Simulator</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+
+    <!--Templates-->
+    <script type="text/x-template" id="graph-template">
+      <g>
+        <polyline :points="points"></polyline>
+      </g>
+    </script>
+  </head>
+  <body>
+    <!--Simulation-->
+    <div id="simulator">
+      <svg class="graph" :width="w" :height="h">
+        <graph :times="times"></graph>
+      </svg>
+      <form v-on:submit.prevent="beginSimulation">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="angle">Angle: {{angle}}&deg;</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="range" min="0" step="0.25" max="90" id="angle" v-model="angle">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="vi">Initial Velocity (m/s)</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" min="0" step="0.1" id="vi" v-model="vi">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="gravity">Gravity (m/s&sup2;)</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" min="0" step="0.1" id="gravity" v-model="g">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="mass">Mass (kg)</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" min="0" step="0.1" id="mass" v-model="m">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="radius">Radius (m)</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" min="0" step="0.01" id="radius" v-model="r">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="wind">Wind Speed (m/s)</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" step="0.1" id="wind" v-model="vw">
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Begin</button>
+      </form>
+    </div>
+
+    <!--Footer-->
+
+    <!--Scripts-->
+    <!--Vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+    <!--Custom Scripts-->
+    <script src="/javascript/rungekutta.js"></script>
+    <script src="/javascript/script.js"></script>
+    <!--Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
