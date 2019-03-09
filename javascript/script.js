@@ -7,9 +7,6 @@ Vue.component('graph', {
     points: function(){
       let size = this.times.length;
       return this.times.map(function(time,i){
-        //let hx = document.getElementById("simulator").style.width;
-        //let hx = $('#graphContainer').width();
-        //let scale = hx/100.0;
         let x = time.x;
         let y = 200 - time.y;
         return x + ',' + y
@@ -28,10 +25,27 @@ new Vue({
     r: 0.1,
     vw: 0,
     times: times,
-    //w: document.getElementById("simulator").style.width,
-    //h: 0.5*document.getElementById("simulator").style.width,
+    h: 0.1,
   },
   computed: {
+    distance: function(){
+      if(this.times.length > 0){
+        return this.times[this.times.length-1].x.toPrecision(5);
+      }
+      else{
+        return 0;
+      }
+    },
+    hmax: function(){
+      let max = 0;
+      for (let i = 0; i < this.times.length; i++){
+        max = Math.max(this.times[i].y,max);
+      };
+      return max.toPrecision(5);
+    },
+    air: function(){
+      return (this.times.length*this.h).toPrecision(5);
+    },
   },
   methods:{
     beginSimulation: function (){
@@ -42,7 +56,7 @@ new Vue({
         m: this.m,
         c: 0.25*(2*this.r)*(2*this.r),
         vw: this.vw,
-        h: 0.1,
+        h: this.h,
       };
       // Now we'll calculate all the points we need.
       // Start by constructing the starting point.
