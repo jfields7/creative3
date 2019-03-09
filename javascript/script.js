@@ -7,8 +7,11 @@ Vue.component('graph', {
     points: function(){
       let size = this.times.length;
       return this.times.map(function(time,i){
+        //let hx = document.getElementById("simulator").style.width;
+        //let hx = $('#graphContainer').width();
+        //let scale = hx/100.0;
         let x = time.x;
-        let y = 300 - time.y;
+        let y = 200 - time.y;
         return x + ',' + y
       }).join(' ');
     }
@@ -27,8 +30,6 @@ new Vue({
     times: times,
     //w: document.getElementById("simulator").style.width,
     //h: 0.5*document.getElementById("simulator").style.width,
-    w: 600,
-    h: 300,
   },
   computed: {
   },
@@ -52,7 +53,7 @@ new Vue({
         y: 0,
       };
       // Delete all the old points.
-      this.times = this.times.splice(0);
+      this.times.length = 0;
       // Add the new point.
       this.times.push(time);
       // Now start looping either until our point is no longer visible or we
